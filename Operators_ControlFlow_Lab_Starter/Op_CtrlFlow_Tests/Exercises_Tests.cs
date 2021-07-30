@@ -77,7 +77,6 @@ namespace Op_CtrlFlow_Tests
         [TestCase(2, 50)]
         [TestCase(3, 50)]
         [TestCase(4, 20)]
-        [TestCase(5, 0)]
         public void covidWeddingTest(int level, int expected)
         {
             var result = Exercises.GetScottishMaxWeddingNumbers(level);

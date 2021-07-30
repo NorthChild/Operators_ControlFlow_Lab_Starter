@@ -92,28 +92,25 @@ namespace Op_CtrlFlow
         public static int GetScottishMaxWeddingNumbers(int covidLevel)
         {
 
-            if (covidLevel == 0)
+            switch (covidLevel)
             {
-                return 200;
-            }
-            else if (covidLevel == 1)
-            {
-                return 100;
-            }
-            else if (covidLevel == 2)
-            {
-                return 50;
-            }
-            else if (covidLevel == 3)
-            {
-                return 50;
-            }
-            else if (covidLevel == 4)
-            {
-                return 20;
-            }
-
-            return 0;
+                case 4:
+                    covidLevel = 20;
+                    break;
+                case 3:
+                    covidLevel = 50;
+                    break;
+                case 2:
+                    covidLevel = 50;
+                    break;
+                case 1:
+                    covidLevel = 100;
+                    break;
+                case 0:
+                    covidLevel = 200;
+                    break;
+        }
+            return covidLevel;
         }
 
             }
