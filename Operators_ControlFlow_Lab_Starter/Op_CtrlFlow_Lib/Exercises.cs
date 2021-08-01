@@ -7,20 +7,28 @@ namespace Op_CtrlFlow
     public class Exercises
     {
 
+
+        static void Main(string[] args) 
+        {
+
+            var myListII = new List<int>() { 3, 8, 1, 7, 3 };
+            Average(myListII);
+        }
+
         public static bool MyMethod(int num1, int num2)
         {
             return num1 == num2 ? false : (num1 % num2) == 0;
         }
 
-        // returns the average of the array nums
+        //returns the average of the array nums
         public static double Average(List<int> nums)
         {
 
-            if (nums.Count == 0) 
+            if (nums.Count == 0)
             {
-                return 0;
+                throw new ArgumentOutOfRangeException("Invalid data");
             }
-            
+
             double averageNum = nums.Average();
 
             return averageNum;
@@ -34,6 +42,7 @@ namespace Op_CtrlFlow
         // "Free" if they are under 5
         public static string TicketType(int age)
         {
+
 
             if (age >= 18 && age <= 59)
             {
@@ -51,9 +60,13 @@ namespace Op_CtrlFlow
             {
                 return "Child";
             }
-            else if (age < 5) 
+            else if (age < 5 && age >= 0)
             {
                 return "Free";
+            }
+            else if (age < 0)
+            {
+                throw new Exception("Invalid input");
             }
 
             string ticketType = string.Empty;
@@ -91,6 +104,10 @@ namespace Op_CtrlFlow
 
         public static int GetScottishMaxWeddingNumbers(int covidLevel)
         {
+            if (covidLevel > 4 || covidLevel < 0)
+            {
+                throw new ArgumentOutOfRangeException("Invalid Input");
+            }
 
             switch (covidLevel)
             {

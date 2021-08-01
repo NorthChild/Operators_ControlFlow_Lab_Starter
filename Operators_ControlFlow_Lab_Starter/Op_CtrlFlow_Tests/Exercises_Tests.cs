@@ -14,6 +14,8 @@ namespace Op_CtrlFlow_Tests
         [TestCase(3, 4, false)]
         [TestCase(10, 10, false)]
         [TestCase(10, 2, true)]
+        [TestCase(6, 2, true)]
+
         public void myMethodTest(int num1, int num2, bool expected)
         {
             var result = Exercises.MyMethod(num1, num2);
@@ -26,12 +28,12 @@ namespace Op_CtrlFlow_Tests
             var myList = new List<int>() { 3, 8, 1, 7, 3 };
             Assert.That(Exercises.Average(myList), Is.EqualTo(4.4));
         }
-
+        // DONE
         [Test]
-        public void WhenListIsEmpty_Average_ReturnsZero()
+        public void WhenListIsEmpty_Average_ReturnsException()
         {
             var myList = new List<int>() {};
-            Assert.That(Exercises.Average(myList), Is.EqualTo(0));
+            Assert.That(() => Exercises.Average(myList), Throws.TypeOf<ArgumentOutOfRangeException>().With.Message.Contains("Invalid data"));
         }
 
         [TestCase(100, "OAP")]
@@ -49,7 +51,12 @@ namespace Op_CtrlFlow_Tests
             var result = Exercises.TicketType(age);
             Assert.That(result, Is.EqualTo(expected));
         }
-
+        // DONE 
+        [TestCase(-1)]
+        public void TicketTypeTestInvalidData(int age)
+        {
+            Assert.That(() => Exercises.TicketType(age), Throws.TypeOf<Exception>().With.Message.Contains("Invalid input"));
+        }
 
         [TestCase(75,"Pass with distinction")]
         [TestCase(100, "Pass with distinction")]
@@ -63,12 +70,20 @@ namespace Op_CtrlFlow_Tests
         [TestCase(0, "Fail")]
         [TestCase(39, "Fail")]
         [TestCase(35, "Fail")]
-
         public void markedGradeTest(int mark, string expected)
         {
             var result = Exercises.Grade(mark);
             Assert.That(result, Is.EqualTo(expected));
 
+        }
+        // DONE 
+        [TestCase(101)]
+        [TestCase(402)]
+        [TestCase(-1)]
+        [TestCase(-112)]
+        public void WhenMarkIsLessThanZero_Grade_ThrowsAnArgumentOutOfRangeException(int mark)
+        {
+            Assert.That(() => Exercises.Grade(mark), Throws.TypeOf<ArgumentOutOfRangeException>().With.Message.Contains("Allowed range 1-100"));
         }
 
 
@@ -84,16 +99,14 @@ namespace Op_CtrlFlow_Tests
 
         }
 
-
-        [TestCase(101)]
-        [TestCase(402)]
+        // DONE 
         [TestCase(-1)]
-        [TestCase(-112)]
-        public void WhenMarkIsLessThanZero_Grade_ThrowsAnArgumentOutOfRangeException(int mark)
+        [TestCase(6)]
+        public void CovidWeddingCodeOutsideBoundaries(int level) 
         {
-            Assert.That(() => Exercises.Grade(mark), Throws.TypeOf<ArgumentOutOfRangeException>().With.Message.Contains("Allowed range 1-100"));
+            Assert.That(() => Exercises.GetScottishMaxWeddingNumbers(level),
+                Throws.TypeOf<ArgumentOutOfRangeException>().With.Message.Contains("Invalid Input"));
         }
-
 
     }
 }
